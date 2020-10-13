@@ -8,6 +8,7 @@ const whitelist = [
   /news\.ycombinator\.com/,
   /hckrnews\.com/,
   /anandtech\.com/,
+  /twitch\.tv/,
 ];
 
 function shouldShowFrame(domain) {
