@@ -1,9 +1,9 @@
 {
-  "name": "CHANGE THIS : Extension boilerplate",
+  "name": "Wasted Time",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Track time wasted on websites",
+  "homepage_url": "https://www.github.com/jchen1/chrome-wasted-time",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -11,29 +11,19 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": [
-      "src/bg/background.js"
-    ],
-    "persistent": false
+    "scripts": ["src/bg/background.js"]
   },
   "browser_action": {
     "default_icon": "icons/icon19.png",
     "default_title": "browser action demo",
     "default_popup": "src/browser_action/browser_action.html"
   },
-  "permissions": [
-    "idle",
-    "tabs",
-    "https://*"
-  ],
+  "permissions": ["idle", "storage", "tabs", "<all_urls>"],
   "content_scripts": [
     {
-      "matches": [
-        "https://www.google.com/*"
-      ],
-      "js": [
-        "src/inject/inject.js"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["src/inject/inject.js"]
     }
-  ]
+  ],
+  "web_accessible_resources": ["src/frame.html"]
 }
