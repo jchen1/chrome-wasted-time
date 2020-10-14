@@ -2,13 +2,15 @@ function interval() {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     tabs.forEach((tab) => {
       const domain = new URL(tab.url).hostname;
-      chrome.windows.get(tab.windowId, (window) => {
-        if (window.focused) {
-          chrome.storage.local.get(domain, (res) => {
-            chrome.storage.local.set({ [domain]: (res[domain] || 0) + 1 });
-          });
-        }
-      });
+      if (shouldShowFrame(domain)) {
+        chrome.windows.get(tab.windowId, (window) => {
+          if (window.focused) {
+            chrome.storage.local.get(domain, (res) => {
+              chrome.storage.local.set({ [domain]: (res[domain] || 0) + 1 });
+            });
+          }
+        });
+      }
     });
   });
 }

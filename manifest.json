@@ -11,7 +11,7 @@
   },
   "default_locale": "en",
   "background": {
-    "scripts": ["src/bg/background.js"]
+    "scripts": ["src/whitelist.js", "src/bg/background.js"]
   },
   "browser_action": {
     "default_icon": "icons/icon19.png",
@@ -22,7 +22,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["src/inject/inject.js"]
+      "js": ["src/whitelist.js", "src/inject/inject.js"]
     }
   ],
   "web_accessible_resources": ["src/frame.html"]
