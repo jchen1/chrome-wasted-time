@@ -1,7 +1,7 @@
 const whitelist = [
   /reddit\.com/,
   /arstechnica\.com/,
-  /youtube\.com/,
+  /www\.youtube\.com/, // exclude youtube music
   /twitter\.com/,
   /facebook\.com/,
   /theringer\.com/,
