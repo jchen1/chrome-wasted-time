@@ -16,10 +16,18 @@ function interval() {
 }
 
 function reset() {
-  const now = new Date();
-  if (now.getHours() === 0 && now.getMinutes() === 0) {
-    chrome.storage.local.clear();
-  }
+  chrome.storage.local.get("wasted-time-last-ts", (res) => {
+    const then = res["wasted-time-last-ts"];
+    const now = Date.now();
+
+    if (
+      Math.floor(then / (1000 * 60 * 60 * 24)) !==
+        Math.floor(now / (1000 * 60 * 60 * 24))
+    ) {
+      chrome.storage.local.clear();
+      chrome.storage.local.set({ "wasted-time-last-ts": now });
+    }
+  });
 }
 
 setInterval(interval, 1000);

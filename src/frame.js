@@ -19,8 +19,13 @@ function interval() {
     const diff = result[url];
     document.getElementById("wasted-here").innerText = formatTime(diff);
 
-    const total = Object.values(result).reduce(
-      (total, site) => total + site,
+    const total = Object.keys(result).reduce(
+      (total, key) => {
+        if (key !== "wasted-time-last-ts") {
+          return total + result[key];
+        }
+        return total;
+      },
       0,
     );
     document.getElementById("wasted-today").innerText = formatTime(total);
