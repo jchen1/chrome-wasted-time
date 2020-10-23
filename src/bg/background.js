@@ -15,15 +15,18 @@ function interval() {
   });
 }
 
+// unix timestamp
+function toLocalDay(ts) {
+  const offset = new Date().getTimezoneOffset() * 60 * 1000;
+  return Math.floor((ts - offset) / (1000 * 60 * 60 * 24));
+}
+
 function reset() {
   chrome.storage.local.get("wasted-time-last-ts", (res) => {
     const then = res["wasted-time-last-ts"];
     const now = Date.now();
 
-    if (
-      Math.floor(then / (1000 * 60 * 60 * 24)) !==
-        Math.floor(now / (1000 * 60 * 60 * 24))
-    ) {
+    if (toLocalDay(then) !== toLocalDay(now)) {
       chrome.storage.local.clear();
       chrome.storage.local.set({ "wasted-time-last-ts": now });
     }
